@@ -41,7 +41,7 @@ defaults:
 jobs:
   check-run:
     name: Check PR run
-    uses: bitwarden/gh-actions/.github/workflows/check-run.yml
+    uses: bitwarden/gh-actions/.github/workflows/check-run.yml@arm64-cli
 
   setup:
     name: Setup
