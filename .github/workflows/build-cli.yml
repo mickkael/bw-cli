@@ -39,15 +39,10 @@ defaults:
     working-directory: apps/cli
 
 jobs:
-  check-run:
-    name: Check PR run
-    uses: mickkael/gh-actions/.github/workflows/check-run.yml@arm64-cli
 
   setup:
     name: Setup
     runs-on: ubuntu-22.04
-    needs:
-      - check-run
     outputs:
       package_version: ${{ steps.retrieve-package-version.outputs.package_version }}
       node_version: ${{ steps.retrieve-node-version.outputs.node_version }}
