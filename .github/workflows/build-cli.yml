@@ -73,7 +73,7 @@ jobs:
         os:
           [
             { base: "linux", distro: "ubuntu-22.04", target_suffix: "" },
-            { base: "linux", distro: "arm64-runner-pi", target_suffix: "-arm64" },
+            { base: "linux", distro: "ubuntu-24.04", target_suffix: "-arm64" },
             { base: "mac", distro: "macos-13", target_suffix: "" },
             { base: "mac", distro: "macos-14", target_suffix: "-arm64" }
           ]
@@ -95,7 +95,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{  github.event.pull_request.head.sha }}
-
+      
+      - name: Configure binfmt with QEMU User Emulation
+        if: ${{ matrix.os.target_suffix == "-arm64" and matrix.os.base == "linux" }}
+        run: |
+          sudo apt install binfmt-support qemu-user-static
+          
       - name: Setup Unix Vars
         run: |
           echo "LOWER_RUNNER_OS=$(echo $RUNNER_OS | awk '{print tolower($0)}')" >> $GITHUB_ENV
