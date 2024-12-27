@@ -100,7 +100,7 @@ jobs:
         if: ${{ matrix.os.target_suffix == '-arm64' && matrix.os.base == 'linux' }}
         run: |
           # sudo dpkg --add-architecture arm64
-          # sudo apt update
+          sudo apt update
           # sudo apt install binfmt-support qemu-user-static libc6:arm64
           sudo apt install build-essential
           
