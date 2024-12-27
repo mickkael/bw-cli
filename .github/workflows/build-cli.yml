@@ -96,12 +96,13 @@ jobs:
         with:
           ref: ${{  github.event.pull_request.head.sha }}
       
-      #- name: Configure binfmt with QEMU User Emulation
-      #  if: ${{ matrix.os.target_suffix == '-arm64' && matrix.os.base == 'linux' }}
-      #  run: |
+      - name: Configure binfmt with QEMU User Emulation
+        if: ${{ matrix.os.target_suffix == '-arm64' && matrix.os.base == 'linux' }}
+        run: |
       #    sudo dpkg --add-architecture arm64
       #    sudo apt update
       #    sudo apt install binfmt-support qemu-user-static libc6:arm64
+           sudo apt install make
           
       - name: Setup Unix Vars
         run: |
